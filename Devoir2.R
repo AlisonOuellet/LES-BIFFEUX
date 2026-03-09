@@ -136,3 +136,52 @@ fit_optim <- optim.pml(fit_best, optGamma = TRUE, optInv = TRUE, optEdge = TRUE)
 par(mar = c(1, 1, 3, 1))
 plot(fit_optim$tree, main = paste("Arbre Final (ML) - Modèle :", best_model$Model), cex = 0.8)
 add.scale.bar()
+
+
+###################################################################
+# ----- d) Analyse des acides aminées et cadres de lecture ------ #
+###################################################################
+
+# Calcul pour l'alignement standard
+dist_LG  <- dist.ml(aa_pd_default, model="LG")
+dist_JTT <- dist.ml(aa_pd_default, model="JTT")
+dist_B62 <- dist.ml(aa_pd_default, model="Blosum62")
+
+# Fonction pour automatiser le bootstrap AA
+run_aa_bootstrap <- function(pd_data, model_name) {
+    # Arbre NJ de référence
+    tree_ref <- nj(dist.ml(pd_data, model = model_name))
+
+    # Bootstrap
+    # On convertit en matrice pour boot.phylo
+    boot <- boot.phylo(tree_ref, as.matrix(as.character(pd_data)),
+                       function(x) nj(dist.ml(as.phyDat(x, type="AA"), model = model_name)),
+                       B = 1000, quiet = TRUE)
+    return(boot)
+}
+
+# Calcul de la robustesse pour le cadre par défaut (Standard)
+boot_LG_std  <- run_aa_bootstrap(aa_pd_default, "LG")
+boot_JTT_std <- run_aa_bootstrap(aa_pd_default, "JTT")
+boot_B62_std <- run_aa_bootstrap(aa_pd_default, "Blosum62")
+
+# Calcul pour le cadre de lecture décalé (LG est le témoin)
+boot_LG_shift <- run_aa_bootstrap(aa_pd_shift, "LG")
+
+# Calcul des moyennes en ignorant les NA (valeurs manquantes)
+res_aa <- data.frame(
+    Modèle = c("LG", "JTT", "Blosum62", "LG_Shifté"),
+    Moyenne_Bootstrap = c(
+        mean(boot_LG_std, na.rm = TRUE),
+        mean(boot_JTT_std, na.rm = TRUE),
+        mean(boot_B62_std, na.rm = TRUE),
+        mean(boot_LG_shift, na.rm = TRUE)
+    )
+)
+
+print(res_aa)
+
+# Visualisation des deux topologies AA pour comparaison
+par(mfrow = c(1, 2))
+plot(nj(dist_LG), main = "Topologie Standard (LG)")
+plot(nj(dist.ml(aa_pd_shift, model="LG")), main = "Topologie Shiftée (Bruit)")
