@@ -79,49 +79,55 @@ dna <- as.DNAbin(alignment_default)
 
 # Matrices de distances avec les différents modèles
 dist_JC  <- dist.dna(dna, pairwise.deletion = FALSE, model = "JC69")    # Jukes-Cantor
-dist_K80 <- dist.dna(dna, model = "K80")     # Kimura 2 paramètres
-dist_TN  <- dist.dna(dna, model = "TN93")    # Tamura-Nei
-dist_LOG <- dist.dna(dna, model = "logdet")  # Galtier-Gouy (LogDet)
+dist_K80 <- dist.dna(dna, pairwise.deletion = FALSE, model = "K80")     # Kimura 2 paramètres
+dist_TN  <- dist.dna(dna, pairwise.deletion = FALSE, model = "TN93")    # Tamura-Nei
+dist_GG95 <- dist.dna(dna, pairwise.deletion = FALSE, model = "GG95")  # Galtier-Gouy (LogDet)
 
 # Construction des arbres
 arbre_JC  <- nj(dist_JC)
 arbre_K80 <- nj(dist_K80)
 arbre_TN  <- nj(dist_TN)
-arbre_LOG <- nj(dist_LOG)
-plot(dist_JC, main = "Valeurs de distance entre les séquences par position nucléotidique", ylab = "distance", xlab= "position")
+arbre_GG95 <- nj(dist_GG95)
 
+par(mfrow=c(2,2), mar=c(1,1,3,1))
+plot(arbre_JC, cex = 0.6, main="Jukes et Cantor")
+plot(arbre_K80, cex = 0.6, main="Kimura 2 parametres 1980")
+plot(arbre_TN, cex = 0.6, main="Tamura et Nei 1993")
+plot(arbre_GG95, cex = 0.6, main="Galtier and Gouy 1995")
+
+#Comparaison des modèles entre eux par corrélation (Pearson)
+round(cor(cbind(dist_JC, dist_TN,dist_K80, dist_GG95)),3)
 
 # boot.phylo nécessite une matrice
 dna_matrix <- as.matrix(dna)
 
 # Bootstrap (1000 itérations)
-boot_JC <- boot.phylo(tree_JC, dna_matrix,
-                      function(x) nj(dist.dna(x, model="JC69")),
-                      B = 1000)
+boot_JC <- boot.phylo(phy = arbre_JC, x = as.matrix(dna), FUN = function(xx) nj(dist.dna(xx,pairwise.deletion = FALSE, model = "JC69")), B = 1000)
+boot_K80 <- boot.phylo(phy = arbre_K80, x = as.matrix(dna), FUN = function(xx) nj(dist.dna(xx,pairwise.deletion = FALSE, model = "K80")), B = 1000)
+boot_TN <- boot.phylo(phy = arbre_TN, x = as.matrix(dna), FUN = function(xx) nj(dist.dna(xx,pairwise.deletion = FALSE, model = "TN93")), B = 1000)
+boot_GG95 <- boot.phylo(phy = arbre_GG95, x = as.matrix(dna), FUN = function(xx) nj(dist.dna(xx,pairwise.deletion = FALSE, model = "GG95")), B = 1000)
 
-boot_K80 <- boot.phylo(tree_K80, dna_matrix,
-                       function(x) nj(dist.dna(x, model="K80")),
-                       B = 1000)
+par(mfrow=c(2,2), mar=c(1,1,3,1))
+plot(arbre_JC, main="Jukes et Cantor")
+nodelabels(boot_JC/10, frame="circle", bg="white", cex=0.6)
 
-boot_TN <- boot.phylo(tree_TN, dna_matrix,
-                      function(x) nj(dist.dna(x, model="TN93")),
-                      B = 1000)
+plot(arbre_K80, main="Kimura 2 paramètres")
+nodelabels(boot_K80/10, frame="circle", bg="white", cex=0.6)
 
-boot_LOG <- boot.phylo(tree_LOG, dna_matrix,
-                       function(x) nj(dist.dna(x, model="logdet")),
-                       B = 1000)
+plot(arbre_TN, main="Tamura-Nei")
+nodelabels(boot_TN/10, frame="circle", bg="white", cex=0.6)
 
-# Calculer la moyenne en ignorant les valeurs manquantes
-mean(boot_JC, na.rm = TRUE)
-mean(boot_K80, na.rm = TRUE)
-mean(boot_TN, na.rm = TRUE)
-mean(boot_LOG, na.rm = TRUE)
+plot(arbre_GG95, main="Galtier-Gouy")
+nodelabels(boot_GG95/10, frame="circle", bg="white", cex=0.6)
+
+round(cor(cbind(boot_JC, boot_TN, boot_K80, boot_GG95),
+          use = "pairwise.complete.obs"),3)
 
 # Conversion vers format phangorn
-dna_phy <- phyDat(as.matrix(alignment_default), type="DNA")
+dna_phy <- as.phyDat(dna)
 
 # Test de modèles
-model_test <- modelTest(dna_phy)
+model_test <- phangorn::modelTest(dna_phy)
 
 model_test
 
