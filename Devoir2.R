@@ -173,7 +173,7 @@ plotBS(
     p = 0,
     type = "p",
     frame = "circle",
-    cex = 0.6,
+    cex = 0.7,
     bs.adj = c(0.5,0.5),
     bg = "white"
 )
