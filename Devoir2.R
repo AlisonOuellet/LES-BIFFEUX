@@ -179,33 +179,6 @@ plotBS(
 )
 
 
-
-
-
-
-# arbre NJ initial
-tree_start <- nj(dist.dna(dna))
-
-# modèle initial
-fit <- pml(tree_start, data=dna_phy)
-
-# optimisation du modèle (exemple pour GTR+G+I)
-fit_opt <- optim.pml(
-    fit,
-    model="GTR",
-    optInv=TRUE,
-    optGamma=TRUE
-)
-
-# arbre final
-plot(fit_opt$tree, main=paste("ML tree -", best_model), cex=0.8)
-
-# bootstrap ML
-bs <- bootstrap.pml(fit_opt, bs=1000)
-
-plotBS(fit_opt$tree, bs)
-
-
 #################################################
 # ------ d) Alignement des acides aminés ------ #
 #################################################
