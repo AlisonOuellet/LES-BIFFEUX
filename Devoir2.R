@@ -21,13 +21,21 @@ library(phangorn)
 ########################################################
 
 # Importation des séquences
-seqs <- readDNAStringSet("Cetacea COI.fasta")
+seqs <- readDNAStringSet("Cetacea COI.fasta", format = "fasta")
 
 # Alignement avec paramètres par défaut
 alignment_default <- AlignSeqs(seqs)
 
 # Alignement avec pénalités d’indels = 0
-alignment_no_gap_penalty <- AlignSeqs(seqs, gapOpening = 0, gapExtension = 0)
+alignment_no_gap <- AlignSeqs(seqs, gapOpening = 0, gapExtension = 0)
+
+# Comparer les alignements
+width(alignment_default)
+width(alignment_no_gap)
+
+# Nombre total de gaps
+sum(letterFrequency(alignment_default, "-"))
+sum(letterFrequency(alignment_no_gap, "-"))
 
 # Export pour vérification
 writeXStringSet(alignment_default, "alignment_default.fasta")
