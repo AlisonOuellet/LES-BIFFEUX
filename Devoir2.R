@@ -173,7 +173,7 @@ plotBS(
     p = 0,
     type = "p",
     frame = "circle",
-    cex = 0.7,
+    cex = 0.8,
     bs.adj = c(0.5,0.5),
     bg = "white"
 )
@@ -183,74 +183,69 @@ plotBS(
 # ------ d) Alignement des acides aminés ------ #
 #################################################
 
-# Choisir l'alignement à tester : cadre de lecture 1 et cadre modifié 2
-aa_alignments <- list(
-    frame1 = aa_alignment_1,
-    frame2 = aa_alignment_2
+# Conversion des alignements AA en format phangorn
+aa_auto_ape <- as.AAbin(aa_alignment_NA)
+aa_auto_phy <- as.phyDat.AAbin(aa_auto_ape, type = "AA")
+
+aa_frame1_ape <- as.AAbin(aa_alignment_1)
+aa_frame1_phy <- as.phyDat.AAbin(aa_frame1_ape, type = "AA")
+
+model_test_aa <- phangorn::modelTest(aa_auto_phy)
+model_test_aa
+
+# Meilleur modèle
+model_test_aa[which.min(model_test_aa$AIC),]
+
+dist_LG <- dist.ml(aa_auto_phy, model="LG")
+dist_JTT <- dist.ml(aa_auto_phy, model="JTT")
+dist_BLOSUM <- dist.ml(aa_auto_phy, model="BLOSUM62")
+
+tree_LG <- NJ(dist_LG)
+tree_JTT <- NJ(dist_JTT)
+tree_BLOSUM <- NJ(dist_BLOSUM)
+
+par(mfrow=c(1,3))
+
+plot(tree_LG, main="NJ - LG")
+plot(tree_JTT, main="NJ - JTT")
+plot(tree_BLOSUM, main="NJ - BLOSUM62")
+
+bs_LG <- bootstrap.phyDat(
+    aa_auto_phy,
+    FUN=function(x) NJ(dist.ml(x, model="LG")),
+    bs=1000
 )
 
-# Modèles d'évolution des protéines
-aa_models <- c("LG", "JTT", "Blosum62")
-
-results <- list()
-
-par(mfrow = c(2, 3), mar = c(2, 2, 4, 1))
-
-# Conversion en phyDat (phangorn)
-aa_phy <- lapply(aa_alignments, function(x) phyDat(as.matrix(x), type="AA"))
-# Liste pour stocker les résultats
-
-for (frame_name in names(aa_phy)) {
-    phy_data <- aa_phy[[frame_name]]
-
-    for (model in aa_models) {
-        cat("\n--- Frame:", frame_name, "- Model:", model, "---\n")
-
-        # Calcul distance et arbre
-        dist_aa <- dist.ml(phy_data, model = model)
-        tree_nj <- NJ(dist_aa)
-
-        # Bootstrap (Remettre bs=1000 pour le rapport final)
-        bs_trees <- bootstrap.phyDat(phy_data,
-                                     FUN = function(x) NJ(dist.ml(x, model = model)),
-                                     bs = 10)
-
-        # Intégrer les valeurs de bootstrap à l'arbre original
-        # p = 0 permet de garder tous les labels pour le calcul de la moyenne
-        tree_with_bs <- plotBS(tree_nj, bs_trees, type = "none", p = 0)
-
-        # Stockage
-        results[[paste(frame_name, model, sep="_")]] <- tree_with_bs
-
-        # Affichage
-        plot(tree_with_bs, main=paste("NJ -", model, "-", frame_name), cex=0.8)
-
-        # Calcul de la moyenne robuste
-        # On extrait les labels, on retire les vides, on convertit en chiffre
-        boot_values <- as.numeric(tree_with_bs$node.label)
-        mean_bs <- mean(boot_values, na.rm = TRUE)
-
-        cat("Robustesse moyenne bootstrap:", round(mean_bs, 2), "%\n")
-    }
-}
-
-# --- RÉSUMÉ DE LA ROBUSTESSE ---
-cat("\n--- RÉSUMÉ DE LA ROBUSTESSE ---\n")
-
-# Création d'un data.frame à partir de la liste 'results'
-df_summary <- data.frame(
-    Analyse = names(results),
-    Mean_Bootstrap = sapply(results, function(x) {
-        valeurs <- as.numeric(x$node.label)
-        mean(valeurs, na.rm = TRUE)
-    })
+bs_JTT <- bootstrap.phyDat(
+    aa_auto_phy,
+    FUN=function(x) NJ(dist.ml(x, model="JTT")),
+    bs=1000
 )
 
-print(df_summary)
+bs_BLOSUM <- bootstrap.phyDat(
+    aa_auto_phy,
+    FUN=function(x) NJ(dist.ml(x, model="BLOSUM62")),
+    bs=1000
+)
 
-# Trouver le gagnant pour le cadre 1 (les 3 premières lignes)
-best_model_idx <- which.max(df_summary$Mean_Bootstrap[1:3])
-cat("\nModèle le plus robuste (Frame 1) :", df_summary$Analyse[best_model_idx], "\n")
+par(mfrow=c(1,3))
+
+plotBS(tree_LG, bs_LG, main="NJ LG + bootstrap")
+
+plotBS(tree_JTT, bs_JTT, main="NJ JTT + bootstrap")
+
+plotBS(tree_BLOSUM, bs_BLOSUM, main="NJ BLOSUM62 + bootstrap")
+
+dist_LG_f1 <- dist.ml(aa_frame1_phy, model="LG")
+tree_LG_f1 <- NJ(dist_LG_f1)
+
+bs_LG_f1 <- bootstrap.phyDat(
+    aa_frame1_phy,
+    FUN=function(x) NJ(dist.ml(x, model="LG")),
+    bs=1000
+)
+
+plotBS(tree_LG_f1, bs_LG_f1, main="Frame 1 corrigé")
 
 
 ###########################################################
