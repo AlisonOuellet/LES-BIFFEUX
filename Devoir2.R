@@ -252,44 +252,79 @@ plotBS(tree_LG_f1, bs_LG_f1, main="Frame 1 corrigé")
 # ------ e) Analyse modelTest par cadre de lecture ------ #
 ###########################################################
 
-# Création des 3 cadres de lecture (Nucléotides)
-dna_frames <- list(
-    frame1 = seqs,
-    frame2 = subseq(seqs, start = 2),
-    frame3 = subseq(seqs, start = 3)
-)
+#############################################
+# ------ e) Cadres de lecture COI ------ #
+#############################################
 
-results_ml_frames <- list()
+# Alignements AA pour chaque cadre
+aa_frame1 <- AlignTranslation(seqs, geneticCode = getGeneticCode("2"),
+                              type = "AAStringSet", readingFrame = 1)
 
-# Boucle sur les 3 cadres
-for (f_name in names(dna_frames)) {
-    cat("\n\n=== ANALYSE :", f_name, "===\n")
+aa_frame2 <- AlignTranslation(seqs, geneticCode = getGeneticCode("2"),
+                              type = "AAStringSet", readingFrame = 2)
 
-    # Alignement et conversion
-    aln <- AlignSeqs(dna_frames[[f_name]], verbose = FALSE)
-    phy_dat <- phyDat(as.matrix(aln), type = "DNA")
+aa_frame3 <- AlignTranslation(seqs, geneticCode = getGeneticCode("2"),
+                              type = "AAStringSet", readingFrame = 3)
+# Conversion en phyDat
+aa1_phy <- as.phyDat(as.AAbin(aa_frame1))
+aa2_phy <- as.phyDat(as.AAbin(aa_frame2))
+aa3_phy <- as.phyDat(as.AAbin(aa_frame3))
+#################################
+# ModelTest pour chaque cadre
+#################################
 
-    # i- Trouver le meilleur modèle avec modelTest()
-    cat("Recherche du meilleur modèle...\n")
-    mt <- modelTest(phy_dat)
-    best_mod <- mt$Model[which.min(mt$AICc)]
-    cat("Meilleur modèle (AICc) pour", f_name, ":", best_mod, "\n")
+mt_aa1 <- modelTest(aa1_phy)
+mt_aa2 <- modelTest(aa2_phy)
+mt_aa3 <- modelTest(aa3_phy)
 
-    # Reconstruction ML avec le modèle trouvé
-    # On part d'un arbre NJ pour l'optimisation
-    tree_init <- nj(dist.dna(as.DNAbin(phy_dat), model = "TN93"))
-    fit <- pml(tree_init, data = phy_dat)
+# Meilleurs modèles
+best_aa1 <- mt_aa1[which.min(mt_aa1$AIC),]
+best_aa2 <- mt_aa2[which.min(mt_aa2$AIC),]
+best_aa3 <- mt_aa3[which.min(mt_aa3$AIC),]
 
-    # Mise à jour du modèle selon modelTest (on simplifie vers le modèle de base)
-    # parse_model est une simplification, on utilise souvent GTR ou le modèle spécifique
-    fit_opt <- optim.pml(fit, model = "GTR", optInv = TRUE, optGamma = TRUE)
+best_aa1
+best_aa2
+best_aa3
 
-    # Bootstrap ML (1000 itérations)
-    cat("Calcul du Bootstrap ML (1000 itérations)...\n")
-    bs_ml <- bootstrap.pml(fit_opt, bs = 1000, optInv = TRUE, optGamma = TRUE)
+#################################
+# Reconstruction arbres + bootstrap
+#################################
 
-    # Sauvegarde et affichage
-    results_ml_frames[[f_name]] <- list(fit = fit_opt, bs = bs_ml, model = best_mod)
+# Frame 1
+tree1 <- NJ(dist.ml(aa1_phy))
+bs1 <- bootstrap.phyDat(aa1_phy, FUN=function(x) NJ(dist.ml(x)), bs=1000)
 
-    plotBS(fit_opt$tree, bs_ml, main = paste("ML Tree -", f_name, "-", best_mod))
+# Frame 2
+tree2 <- NJ(dist.ml(aa2_phy))
+bs2 <- bootstrap.phyDat(aa2_phy, FUN=function(x) NJ(dist.ml(x)), bs=1000)
+
+# Frame 3
+tree3 <- NJ(dist.ml(aa3_phy))
+bs3 <- bootstrap.phyDat(aa3_phy, FUN=function(x) NJ(dist.ml(x)), bs=1000)
+
+# Visualisation
+clean_labels <- function(labels) {
+    labels <- sub(".*\\| ", "", labels)          # enlève le début gi|...
+    labels <- sub(" cytochrome.*", "", labels)   # enlève la fin inutile
+    return(labels)
 }
+tree1$tip.label <- clean_labels(tree1$tip.label)
+tree2$tip.label <- clean_labels(tree2$tip.label)
+tree3$tip.label <- clean_labels(tree3$tip.label)
+
+
+plot(tree1,
+     main="Frame 1",
+     cex=0.6,
+     direction="rightwards",
+     use.edge.length=FALSE)
+plot(tree2,
+     main="Frame 2",
+     cex=0.6,
+     direction="rightwards",
+     use.edge.length=FALSE)
+plot(tree3,
+     main="Frame 3",
+     cex=0.5,
+     direction="rightwards",
+     use.edge.length=FALSE)
