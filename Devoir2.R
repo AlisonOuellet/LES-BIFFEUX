@@ -198,7 +198,7 @@ model_test_aa[which.min(model_test_aa$AIC),]
 
 dist_LG <- dist.ml(aa_auto_phy, model="LG")
 dist_JTT <- dist.ml(aa_auto_phy, model="JTT")
-dist_BLOSUM <- dist.ml(aa_auto_phy, model="BLOSUM62")
+dist_BLOSUM <- dist.ml(aa_auto_phy, model="Blosum62")
 
 tree_LG <- NJ(dist_LG)
 tree_JTT <- NJ(dist_JTT)
@@ -224,7 +224,7 @@ bs_JTT <- bootstrap.phyDat(
 
 bs_BLOSUM <- bootstrap.phyDat(
     aa_auto_phy,
-    FUN=function(x) NJ(dist.ml(x, model="BLOSUM62")),
+    FUN=function(x) NJ(dist.ml(x, model="Blosum62")),
     bs=1000
 )
 
