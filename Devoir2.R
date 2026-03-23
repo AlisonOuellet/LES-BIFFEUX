@@ -89,11 +89,38 @@ arbre_K80 <- nj(dist_K80)
 arbre_TN  <- nj(dist_TN)
 arbre_GG95 <- nj(dist_GG95)
 
-par(mfrow=c(2,2), mar=c(1,1,3,1))
-plot(arbre_JC, cex = 0.6, main="Jukes et Cantor")
-plot(arbre_K80, cex = 0.6, main="Kimura 2 parametres 1980")
-plot(arbre_TN, cex = 0.6, main="Tamura et Nei 1993")
-plot(arbre_GG95, cex = 0.6, main="Galtier and Gouy 1995")
+# Amélioration des labels
+"clean_labels <- function(labels) {
+
+    # Extraire "Genre espèce" (fonctionne toujours)
+    species <- sub(".*?([A-Z][a-z]+\\s[a-z]+).*", "\\1", labels)
+
+    # Détecter voucher s’il existe
+    has_voucher <- grepl("voucher", labels)
+
+    # Extraire voucher proprement
+    voucher <- ifelse(has_voucher,
+                      sub(".*voucher ([A-Za-z0-9:.-]+).*", "\\1", labels),
+                      "")
+
+    # Construire label final
+    final_labels <- ifelse(has_voucher,
+                           paste0(species, " (", voucher, ")"),
+                           species)
+
+    return(final_labels)
+}
+
+arbre_JC$tip.label  <- clean_labels(arbre_JC$tip.label)
+arbre_K80$tip.label <- clean_labels(arbre_K80$tip.label)
+arbre_TN$tip.label  <- clean_labels(arbre_TN$tip.label)
+arbre_GG95$tip.label <- clean_labels(arbre_GG95$tip.label"
+
+
+plot(arbre_JC, cex = 0.9, main="Jukes et Cantor", edge.width = 1.5, x.lim = c(0, max(node.depth.edgelength(arbre_JC)) * 2.5))
+plot(arbre_K80, cex = 0.9, main="Kimura 2 parametres 1980", edge.width = 1.5, x.lim = c(0, max(node.depth.edgelength(arbre_JC)) * 2.5))
+plot(arbre_TN, cex = 0.9, main="Tamura et Nei 1993", edge.width = 1.5, x.lim = c(0, max(node.depth.edgelength(arbre_JC)) * 2.5))
+plot(arbre_GG95, cex = 0.9, main="Galtier and Gouy 1995", edge.width = 1.5)
 
 #Comparaison des modèles entre eux par corrélation (Pearson)
 round(cor(cbind(dist_JC, dist_TN,dist_K80, dist_GG95)),3)
@@ -112,21 +139,72 @@ summary(boot_K80)
 summary(boot_TN)
 summary(boot_GG95)
 
-par(mfrow=c(2,2), mar=c(1,1,3,1))
-plot(arbre_JC, main="Jukes et Cantor")
-nodelabels(boot_JC/10, frame="circle", bg="white", cex=0.6)
+# Amélioration des labels
+"clean_labels <- function(labels) {
 
-plot(arbre_K80, main="Kimura 2 paramètres")
-nodelabels(boot_K80/10, frame="circle", bg="white", cex=0.6)
+    # Extraire "Genre espèce" (fonctionne toujours)
+    species <- sub(".*?([A-Z][a-z]+\\s[a-z]+).*", "\\1", labels)
 
-plot(arbre_TN, main="Tamura-Nei")
-nodelabels(boot_TN/10, frame="circle", bg="white", cex=0.6)
+    # Détecter voucher s’il existe
+    has_voucher <- grepl("voucher", labels)
 
-plot(arbre_GG95, main="Galtier-Gouy")
-nodelabels(boot_GG95/10, frame="circle", bg="white", cex=0.6)
+    # Extraire voucher proprement
+    voucher <- ifelse(has_voucher,
+                      sub(".*voucher ([A-Za-z0-9:.-]+).*", "\\1", labels),
+                      "")
+
+    # Construire label final
+    final_labels <- ifelse(has_voucher,
+                           paste0(species, " (", voucher, ")"),
+                           species)
+
+    return(final_labels)
+}
+
+arbre_JC$tip.label  <- clean_labels(arbre_JC$tip.label)
+arbre_K80$tip.label <- clean_labels(arbre_K80$tip.label)
+arbre_TN$tip.label  <- clean_labels(arbre_TN$tip.label)
+arbre_GG95$tip.label <- clean_labels(arbre_GG95$tip.label)"
+
+
+plot(arbre_JC, main = "Jukes et Cantor", cex = 0.9, edge.width = 1.5, label.offset = 0.002)
+nodelabels(boot_JC/10, frame = "circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(1.2), col = "red")
+
+plot(arbre_K80, main="Kimura 2 paramètres", cex = 0.9, edge.width = 1.5, label.offset = 0.002)
+nodelabels(boot_K80/10, frame="circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(0.9), col = "red")
+
+plot(arbre_TN, main="Tamura-Nei", cex = 0.9, edge.width = 1.5, label.offset = 0.002)
+nodelabels(boot_TN/10, frame="circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(0.9), col = "red")
+
+plot(arbre_GG95, main="Galtier-Gouy", cex = 0.9, edge.width = 1.5, label.offset = 0.015, x.lim = 1.5)
+nodelabels(boot_GG95/10, frame="circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(0.6), col = "red")
 
 round(cor(cbind(boot_JC, boot_TN, boot_K80, boot_GG95),
           use = "pairwise.complete.obs"),3)
+clean_labels <- function(labels) {
+
+    # Extraire "Genre espèce" (fonctionne toujours)
+    species <- sub(".*?([A-Z][a-z]+\\s[a-z]+).*", "\\1", labels)
+
+    # Détecter voucher s’il existe
+    has_voucher <- grepl("voucher", labels)
+
+    # Extraire voucher proprement
+    voucher <- ifelse(has_voucher,
+                      sub(".*voucher ([A-Za-z0-9:.-]+).*", "\\1", labels),
+                      "")
+
+    # Construire label final
+    final_labels <- ifelse(has_voucher,
+                           paste0(species, " (", voucher, ")"),
+                           species)
+
+    return(final_labels)
+}
+
+labels_clean <- make.unique(clean_labels(names(dna)))
+
+names(dna) <- labels_clean
 
 # Conversion vers format phangorn
 dna_phy <- as.phyDat(dna)
@@ -135,7 +213,7 @@ dna_phy <- as.phyDat(dna)
 model_test <- phangorn::modelTest(dna_phy)
 model_test
 
-# tester le smodèles évolutifs
+# tester les modèles évolutifs
 env <- attr(model_test, "env")
 ls(env = env)
 
@@ -151,6 +229,7 @@ plot(treeNJ, main="Neighbor-Joining")
 fit <- pml(treeNJ, data = dna_phy)
 
 fitGTR <- update(fit, k = 4, inv = 0.2)
+
 fitGTR <- optim.pml(
     fitGTR,
     model = "GTR",
