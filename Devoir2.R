@@ -71,10 +71,12 @@ writeXStringSet(aa_alignment_NA, "aa_alignment_NA.fasta")
 aa_alignment_1 <- AlignTranslation(seqs, geneticCode = getGeneticCode("2"), type = "AAStringSet", readingFrame = 1)
 writeXStringSet(aa_alignment_1, "aa_alignment_1.fasta")
 
+
 # Vérification
 # Nombre de codons stop par séquence
 stops_NA <- letterFrequency(aa_alignment_NA, "*")
 stops_frame1 <- letterFrequency(aa_alignment_1, "*")
+
 
 # Résumé statistique (min, médiane, max)
 summary(stops_NA)
@@ -167,7 +169,7 @@ treeNJ <- NJ(dm)
 plot(treeNJ, main="Neighbor-Joining")
 
 fit <- pml(treeNJ, data = dna_phy)
-fitGTR <- update(fit, k = 4, inv = 0.2)
+fitGTR <- update(fit, k = 4, inv = 0.589870901568932)
 
 fitGTR <- optim.pml(
     fitGTR,
@@ -323,7 +325,19 @@ fit1 <- pml(tree1, data = aa1_phy)
 fit2 <- pml(tree2, data = aa2_phy)
 fit3 <- pml(tree3, data = aa3_phy)
 
-fit1_opt <- optim.pml(fit1, model = model1, optGamma = TRUE)
+env1 <- attr(best_aa1, "env")
+
+fit1GTR <- update(fit1, k = 4)
+
+env2 <- attr(best_aa2, "env")
+
+fit1GTR <- update(fit2, inv=0.0262952483415596 )
+
+env3 <- attr(best_aa3, "env")
+
+fit1GTR <- update(fit3, inv = 0.0276463238233312)
+
+fit1_opt <- optim.pml(fit1GTR, model = model1, optGamma = TRUE)
 fit2_opt <- optim.pml(fit2, model = model2, optGamma = TRUE)
 fit3_opt <- optim.pml(fit3, model = model3, optGamma = TRUE)
 
