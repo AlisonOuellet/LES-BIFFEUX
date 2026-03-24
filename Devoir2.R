@@ -22,46 +22,25 @@ library(phangorn)
 
 clean_labels_standard <- function(labels) {
 
-
-
-    # Extraire "Genre espèce" (fonctionne toujours)
-
+    # Extraire "Genre espèce"
     species <- sub(".*?([A-Z][a-z]+\\s[a-z]+).*", "\\1", labels)
 
-
-
-    # Détecter voucher s’il existe
-
-    has_voucher <- grepl("voucher", labels)
-
-
-
-    # Extraire voucher proprement
-
-    voucher <- ifelse(has_voucher,
-
-                      sub(".*voucher ([A-Za-z0-9:.-]+).*", "\\1", labels),
-
-                      "")
-
-
+    # Extraire UAM:Mamm même sans parenthèses
+    uam <- ifelse(grepl("UAM:Mamm:[0-9]+", labels),
+                  sub(".*(UAM:Mamm:[0-9]+).*", "\\1", labels),
+                  "")
 
     # Construire label final
-
-    final_labels <- ifelse(has_voucher,
-
-                           paste0(species, " (", voucher, ")"),
-
+    final_labels <- ifelse(uam != "",
+                           paste0(species, " (", uam, ")"),
                            species)
 
-
-
     return(final_labels)
-
 }
 
 # Importation des séquences
 seqs <- readDNAStringSet("Cetacea COI.fasta", format = "fasta")
+names(seqs) <- clean_labels_standard(names(seqs))
 
 # Alignement avec paramètres par défaut
 alignment_default <- AlignSeqs(seqs)
@@ -91,10 +70,6 @@ writeXStringSet(aa_alignment_NA, "aa_alignment_NA.fasta")
 
 aa_alignment_1 <- AlignTranslation(seqs, geneticCode = getGeneticCode("2"), type = "AAStringSet", readingFrame = 1)
 writeXStringSet(aa_alignment_1, "aa_alignment_1.fasta")
-
-# Amélioration des étiquettes
-names(aa_alignment_NA) <- clean_labels_standard(names(aa_alignment_NA))
-names(aa_alignment_1) <- clean_labels_standard(names(aa_alignment_1))
 
 # Vérification
 # Nombre de codons stop par séquence
@@ -133,11 +108,8 @@ arbre_K80 <- nj(dist_K80)
 arbre_TN  <- nj(dist_TN)
 arbre_GG95 <- nj(dist_GG95)
 
-arbre_JC$tip.label  <- clean_labels_standard(arbre_JC$tip.label)
-arbre_K80$tip.label <- clean_labels_standard(arbre_K80$tip.label)
-arbre_TN$tip.label  <- clean_labels_standard(arbre_TN$tip.label)
-arbre_GG95$tip.label <- clean_labels_standard(arbre_GG95$tip.label)
-
+# Visualisation
+par(mar = c(1, 1, 1, 1))
 plot(arbre_JC, cex = 0.9, main="Jukes et Cantor", edge.width = 1.5, x.lim = c(0, max(node.depth.edgelength(arbre_JC)) * 2.5))
 plot(arbre_K80, cex = 0.9, main="Kimura 2 parametres 1980", edge.width = 1.5, x.lim = c(0, max(node.depth.edgelength(arbre_JC)) * 2.5))
 plot(arbre_TN, cex = 0.9, main="Tamura et Nei 1993", edge.width = 1.5, x.lim = c(0, max(node.depth.edgelength(arbre_JC)) * 2.5))
@@ -161,21 +133,19 @@ summary(boot_TN)
 summary(boot_GG95)
 
 plot(arbre_JC, main = "Jukes et Cantor", cex = 0.9, edge.width = 1.5, label.offset = 0.002)
-nodelabels(boot_JC/10, frame = "circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(1.2), col = "red")
+nodelabels(boot_JC/10, frame = "circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(0.5), col = "red")
 
 plot(arbre_K80, main="Kimura 2 paramètres", cex = 0.9, edge.width = 1.5, label.offset = 0.002)
-nodelabels(boot_K80/10, frame="circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(0.9), col = "red")
+nodelabels(boot_K80/10, frame="circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(0.5), col = "red")
 
 plot(arbre_TN, main="Tamura-Nei", cex = 0.9, edge.width = 1.5, label.offset = 0.002)
-nodelabels(boot_TN/10, frame="circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(0.9), col = "red")
+nodelabels(boot_TN/10, frame="circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(0.5), col = "red")
 
 plot(arbre_GG95, main="Galtier-Gouy", cex = 0.9, edge.width = 1.5, label.offset = 0.015, x.lim = 1.5)
-nodelabels(boot_GG95/10, frame="circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(0.6), col = "red")
+nodelabels(boot_GG95/10, frame="circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(0.5), col = "red")
 
 round(cor(cbind(boot_JC, boot_TN, boot_K80, boot_GG95),
           use = "pairwise.complete.obs"),3)
-
-names(dna) <- clean_labels_standard(names(dna))
 
 # Conversion vers format phangorn
 dna_phy <- as.phyDat(dna)
@@ -225,8 +195,7 @@ plotBS(
     cex = 0.7,
     bs.adj = c(0.7, 0.7),
     bg = "#FFFFFFCC",
-    bs.col = "red",
-    edge.width = 1.5
+    bs.col = "red"
 )
 
 
@@ -238,11 +207,9 @@ plotBS(
 # Conversion des alignements AA en format phangorn
 aa_auto_ape <- as.AAbin(aa_alignment_NA)
 aa_auto_phy <- as.phyDat.AAbin(aa_auto_ape, type = "AA")
-names(aa_auto_phy) <- clean_labels_standard(names(aa_auto_phy))
 
 aa_frame1_ape <- as.AAbin(aa_alignment_1)
 aa_frame1_phy <- as.phyDat.AAbin(aa_frame1_ape, type = "AA")
-names(aa_frame1_phy) <- clean_labels_standard(names(aa_frame1_phy))
 
 model_test_aa <- phangorn::modelTest(aa_auto_phy)
 model_test_aa
@@ -303,7 +270,7 @@ bs_LG_f1 <- bootstrap.phyDat(
 
 par(mar = c(1, 1, 1, 1))
 plotBS(tree_LG_f1, bs_LG_f1, main="Frame 1 corrigé",frame="circle", bg = "#FFFFFFCC",
-       bs.col = "red", cex=0.7, p=0)
+       bs.col = "red", cex=0.6, p=0)
 ###########################################################
 # ------ e) Analyse modelTest par cadre de lecture ------ #
 ###########################################################
@@ -317,9 +284,6 @@ aa_frame2 <- AlignTranslation(seqs, geneticCode = getGeneticCode("2"),
 aa_frame3 <- AlignTranslation(seqs, geneticCode = getGeneticCode("2"),
                               type = "AAStringSet", readingFrame = 3)
 
-names(aa_frame1) <- clean_labels_standard(names(aa_frame1))
-names(aa_frame2) <- clean_labels_standard(names(aa_frame2))
-names(aa_frame3) <- clean_labels_standard(names(aa_frame3))
 
 # Conversion en phyDat
 aa1_phy <- as.phyDat(as.AAbin(aa_frame1))
@@ -345,9 +309,6 @@ best_aa3
 #################################
 # Reconstruction arbres + bootstrap
 #################################
-names(aa1_phy) <- make.unique(names(aa1_phy))
-names(aa2_phy) <- make.unique(names(aa2_phy))
-names(aa3_phy) <- make.unique(names(aa3_phy))
 
 # Créer les arbres de base (Neighbor-Joining) pour initialiser pml()
 tree1 <- NJ(dist.ml(aa1_phy))
@@ -370,15 +331,14 @@ bs1 <- bootstrap.pml(fit1_opt, bs = 1000)
 bs2 <- bootstrap.pml(fit2_opt, bs = 1000)
 bs3 <- bootstrap.pml(fit3_opt, bs = 1000)
 
-par(mar = c(1, 1, 1, 1))
+par(mar = c(1,1,1,1))
 plotBS(fit1_opt$tree, bs1,
        main="Frame 1",
        frame="circle",
        bg = "#FFFFFFCC",
        bs.col = "red",
-       cex=0.7,
+       cex=0.6,
        p=0)
-
 
 plotBS(fit2_opt$tree, bs2,
        main="Frame 2",
@@ -388,12 +348,11 @@ plotBS(fit2_opt$tree, bs2,
        cex=0.6,
        p=0)
 
-jpeg('rplot.jpg')
 plotBS(fit3_opt$tree, bs3,
        main="Frame 3",
        frame="circle",
        bg = "#FFFFFFCC",
        bs.col = "red",
-       cex=0.6,
+       cex=0.7,
        p=0)
 dev.off()

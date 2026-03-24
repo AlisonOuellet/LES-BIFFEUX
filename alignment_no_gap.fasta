@@ -1,4 +1,4 @@
->gi|157058301|gb|EU139268.1| Balaena mysticetus voucher UAM:Mamm:67182 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Balaena mysticetus (UAM:Mamm:67182)
 A------------C------------C-T-TA------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------TG-C----CTG-AGC---------AG--G---AA---T---
 A---G---TAG-----G--CA---C--T-G------------------G------CC-----TAA---GC----------
@@ -28,7 +28,7 @@ A------A---C-C-A-C---C--C--------G-C-C----AT-A------A----CC--CA--A--------TA-TCA
 ------C----C--C--------------T---G------CA------G-GT--G------G--------A-----G--G
 -------------A--G-A--------C-C---C-AA---T--------C---------CT------------G------
 ------TA---------------------------------------------------------------------
->gi|157058303|gb|EU139269.1| Balaena mysticetus voucher UAM:Mamm:41585 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Balaena mysticetus (UAM:Mamm:41585)
 A------------C------------C-T-TA------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------TG-C----CTG-AGC---------AG--G---AA---T---
 A---G---TAG-----G--CA---C--T-G------------------G------CC-----TAA---GC----------
@@ -58,7 +58,7 @@ A------A---C-C-A-C---C--C--------G-C-C----AT-A------A----CC--CA--A--------TA-TCA
 ------C----C--C--------------T---G------CA------G-GT--G------G--------A-----G--G
 -------------A--G-A--------C-C---C-AA---T--------C---------CT------------G------
 ------TA---------------------------------------------------------------------
->gi|157058305|gb|EU139270.1| Balaena mysticetus voucher UAM:Mamm:86893 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Balaena mysticetus (UAM:Mamm:86893)
 A------------C------------C-T-TA------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------TG-C----CTG-AGC---------AG--G---AA---T---
 A---G---TAG-----G--CA---C--T-G------------------G------CC-----TAA---GC----------
@@ -88,7 +88,7 @@ A------A---C-C-A-C---C--C--------G-C-C----AT-A------A----CC--CA--A--------TA-TCA
 ------C----C--C--------------T---G------CA------G-GT--G------G--------A-----G--G
 -------------A--G-A--------C-C---C-AA---T--------C---------CT------------G------
 ------TA---------T------C----A---AC------AC-----C--TA---TTC------------------
->gi|157058307|gb|EU139271.1| Balaena mysticetus voucher UAM:Mamm:86892 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Balaena mysticetus (UAM:Mamm:86892)
 A------------C------------C-T-TA------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------TG-C----CTG-AGC---------AG--G---AA---T---
 A---G---TAG-----G--CA---C--T-G------------------G------CC-----TAA---GC----------
@@ -118,7 +118,7 @@ A------A---C-C-A-C---C--C--------G-C-C----AT-A------A----CC--CA--A--------TA-TCA
 ------C----C--C--------------T---G------CA------G-GT--G------G--------A-----G--G
 -------------A--G-A--------C-C---C-AA---T--------C---------CT------------G------
 ------TA---------T------C----A---AC------AC-----C--TA---TTC------------------
->gi|157058309|gb|EU139272.1| Balaenoptera physalus voucher UAM:Mamm:86891 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Balaenoptera physalus (UAM:Mamm:86891)
 A------------C------------C-C-TA------------T------A-------------------------C--
 -T-T-A---TTA---T--T--C--G----G---------TG-----CTTG-AGC---------AG--G---AA---T---
 A---G---TAG-----G--CA---C--T-G------------------G------CC-----TAA---GC----------
@@ -148,7 +148,7 @@ A------A---C-C-G-----C--C---C----G-C-C----AT-A------A----CC--CA--G--------TA-TCA
 ------C----C--C--------------T---G------CA------G-GT--G------G--------A-----G--G
 -------------A--G-A--------------C---------------C---------C--------------------
 -------A---------------------A---------------------TC-----------C-------TAT--
->gi|157058311|gb|EU139273.1| Callorhinus ursinus voucher UAM:Mamm:79785 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Callorhinus ursinus (UAM:Mamm:79785)
 A------------C------------C-C-TC------------T------A----------------------------
 -CCT-A---TTA-T-T--T-----G----G---------TG-C----ATG-AGC---------TG--G---AA---T---
 G---G---CTG-----G--CA---C--T-G--------------C----------CC-----TCA---GC----------
@@ -178,7 +178,7 @@ A------AC--C-C-C-----C--C--------G-C-C----AT-A------T----CC--CA--A--------TA-TCA
 ---T--C----C--A------------------G------CC------G-GA--G------G--------G-----G--G
 -------------T--G-ACC-CT-A-T-C---C-TA---T---------------------------------------
 -----------------------------------------------------------------------------
->gi|157058313|gb|EU139274.1| Callorhinus ursinus voucher UAM:Mamm:52179 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Callorhinus ursinus (UAM:Mamm:52179)
 A------------C------------C-C-TC------------T------A----------------------------
 -CCT-A---TTA-T-T--T-----G----G---------TG-C----ATG-AGC---------TG--G---AA---T---
 G---G---CTG-----G--CA---C--T-G--------------C----------CC-----TCA---GC----------
@@ -208,7 +208,7 @@ A------AC--C-C-C-----C--C--------G-C-C----AT-A------T----CC--CA--A--------TA-TCA
 ---T--C----C--A------------------G------CC------G-GA--G------G--------G-----G--G
 -------------T--G-ACC-CT-A-T-C---C-TA-------------------------------------------
 -----------------------------------------------------------------------------
->gi|157058315|gb|EU139275.1| Callorhinus ursinus voucher UAM:Mamm:16550 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Callorhinus ursinus (UAM:Mamm:16550)
 A------------C------------C-C-TC------------T------A----------------------------
 -CCT-A---TTA-T-T--T-----G----G---------TG-C----ATG-AGC---------TG--G---AA---T---
 G---G---CTG-----G--CA---C--T-G--------------C----------CC-----TCA---GC----------
@@ -238,7 +238,7 @@ A------AC--C-C-C-----C--C--------G-C-C----AT-A------T----CC--CA--A--------TA-TCA
 ---T--C----C--A------------------G------CC------G-GA--G------G--------G-----G--G
 -------------T--G-A--------C-C---C-T--------------------------------------------
 -----------------------------------------------------------------------------
->gi|157058317|gb|EU139276.1| Callorhinus ursinus voucher UAM:Mamm:92549 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Callorhinus ursinus (UAM:Mamm:92549)
 A------------C------------C-C-TC------------T------A----------------------------
 -CCT-A---TTA-T-T--T-----G----G---------TG-C----ATG-AGC---------TG--G---AA---T---
 G---G---CTG-----G--CA---C--T-G--------------C----------CC-----TCA---GC----------
@@ -268,7 +268,7 @@ A------AC--C-C-C-----C--C--------G-C-C----AT-A------T----CC--CA--A--------TA-TCA
 ---T--C----C--A------------------G------CC------G-GA--G------G--------G-----G--G
 -------------T--G-ACC-CT-A-T-C---C-TA---TATCAACATCT-AT--T--C--------------------
 -----------------------------------------------------------------------------
->gi|157058319|gb|EU139277.1| Delphinapterus leucas voucher UAM:Mamm:67158 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Delphinapterus leucas (UAM:Mamm:67158)
 A---------------------------CTT-------------T------A---------------T--------A---
 -TCT-A---CTA-T-T--T-----G----G---------TG-C----CTG-AGC---------AG--G---AA---T---
 A---G---TAG-----G--CA---C--C-G------------------G------CC-----TAA---GC----------
@@ -298,7 +298,7 @@ A------A---C-C-A-C---C--C--------G---C--T-AT-A------A----CC--CA--A--------TA-CCA
 ------C----C--C--T---------------G------CA------G-GA--G------G--------A-----G--G
 ---C------------G-A-------C--C---C--A--GT--------C---------CT-------------------
 -----ATA---------T------C----A---AC------ACC-T------A----T----T-C------------
->gi|157058321|gb|EU139278.1| Delphinus delphis voucher UAM:Mamm:90357 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Delphinus delphis (UAM:Mamm:90357)
 A------------C------------C-C-TA------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------CG-C----TTG-GGC---------AG--G---AA---T---
 A---G---TAG-----G--TA---C--C-G------------------G------TC-----TAA---G-----------
@@ -328,7 +328,7 @@ A------A---C-C-A-C---C--C--------G---C--T-AT-A------A----CT--CA--A--------TA-CCA
 ------C----C--C--G---------------G------CA------G-GA--G------G--------A-----G--G
 ---T------------G-A-------C--C---C-AA---T------------------CT-----------T-------
 -----ATA---------T------C----A---AC------AC--T-----TA----T----T-C------------
->gi|157058323|gb|EU139279.1| Eschrichtius robustus voucher UAM:Mamm:90216 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Eschrichtius robustus (UAM:Mamm:90216)
 A------------C------------C-C-TA------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------TG-C----CTG-AGC---------AG--G---AA---T---
 A---G---TAG-----G--CA---C--T-G------------------G------CC-----TAA---GC----------
@@ -358,7 +358,7 @@ A------A---C-C-A-----C--C---T----G-C-C----AT-A------A----CC--CA--A--------TA-CCA
 ------C----C--C--------------C---G------CA------G-GT--G------G--------A-----G--G
 -------------A--G-A--------T-C---C-AA---T--------C---------CT------------A------
 ------TA----------------CC---A---AC------AC-----C--TA---TTC------------------
->gi|157058325|gb|EU139280.1| Eschrichtius robustus voucher UAM:Mamm:90218 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Eschrichtius robustus (UAM:Mamm:90218)
 A------------C------------C-C-TA------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------TG-C----CTG-AGC---------AG--G---AA---T---
 A---G---TAG-----G--CA---C--T-G------------------G------CC-----TAA---GC----------
@@ -388,7 +388,7 @@ A------A---C-C-A-----C--C---T----G-C-C----AT-A------A----CC--CA--A--------TA-CCA
 ------C----C--C--------------C---G------CA------G-GT--G------G--------A-----G--G
 -------------A--G-A--------T-C---C-AA---T--------C---------CT------------A------
 ------TA----------------CC---A---AC------AC-----C--TA---TTC------------------
->gi|157058327|gb|EU139281.1| Lagenorhynchus obliquidens voucher UAM:Mamm:90373 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Lagenorhynchus obliquidens (UAM:Mamm:90373)
 A------------C------------C-C-TG------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------CG-C----TTG-AGC---------AG--G---AA---T---
 A---G---TGG-----G--TA---C--T-G------------------G------CC-----TAA---GC----------
@@ -418,7 +418,7 @@ A------A---C-C-A-C---C--C--------G---C--T-AT-A------A----CC--CA--A--------TA-TCA
 ------C----C--C--G---------------G------CA------G-GA--G------G--------A-----G--G
 ---T------------G-A-------C--C---C-AA---T------------------CT-----------T-------
 -----ATA---------T------C----A---AC------AC--T-----TG----T----T-C------------
->gi|157058329|gb|EU139282.1| Lagenorhynchus obliquidens voucher UAM:Mamm:90362 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Lagenorhynchus obliquidens (UAM:Mamm:90362)
 A------------C------------C-C-TG------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------CG-C----TTG-AGC---------AG--G---AA---T---
 A---G---TGG-----G--TA---C--T-G------------------G------CC-----TAA---GC----------
@@ -448,7 +448,7 @@ A------A---C-C-A-C---C--C--------G---C--T-AT-A------A----CC--CA--A--------TA-TCA
 ------C----C--C--G---------------G------CA------G-GA--G------G--------A-----G--G
 ---T------------G-A-------C--C---C-AA---T------------------CT-----------T-------
 -----ATA---------T------C----A---AC------AC--T-----TG----T----T-C------------
->gi|157058331|gb|EU139283.1| Lagenorhynchus obliquidens voucher UAM:Mamm:90239 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Lagenorhynchus obliquidens (UAM:Mamm:90239)
 A------------C------------C-C-TG------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------CG-C----TTG-AGC---------AG--G---AA---T---
 A---G---TGG-----G--TA---C--T-G------------------G------CC-----TAA---GC----------
@@ -478,7 +478,7 @@ A------A---C-C-A-C---C--C--------G---C--T-AT-A------A----CC--CA--A--------TA-TCA
 ------C----C--C--G---------------G------CA------G-GA--G------G--------A-----G--G
 ---T------------G-A-------C--C---C-AA---T------------------C--------------------
 ------T----------T-----------------------A----------------------T------------
->gi|157058333|gb|EU139284.1| Lissodelphis borealis voucher UAM:Mamm:90371 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Lissodelphis borealis (UAM:Mamm:90371)
 A-------------------------C-CTTG------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------CG-C----CTG-AGC---------AG--G---AA---T---
 A---G---TGG-----G--TA---C--T-G------------------G------TC-----TGA---GC----------
@@ -508,7 +508,7 @@ A------A---C-C-A-C---C--C--------G---C--T-AT-A------A----CC--CA--A--------TA-CCA
 ------C----C--C--G---------------G------CA------G-GA--G------G--------A-----G--G
 ---G------------G-A-------C--C---C-AA---T------------------CT-----------T-------
 -----ATA---------T------C----A---AC------AC--T-----TG----T----T-C------------
->gi|157058335|gb|EU139285.1| Megaptera novaeangliae voucher UAM:Mamm:30661 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Megaptera novaeangliae (UAM:Mamm:30661)
 A------------C------------C-C-TA------------T------A---------------T------------
 -T-T-A---TTA-T-T--T-----G----G---------TG-C----CTG-AGC---------AG--G---AA---T---
 A---G---TAG-----G--CA---C--T-G------------------G------CC-----TAA---GC----------
@@ -538,7 +538,7 @@ A------A---C-C-A-----C--C---T----G-C-C----AT-G------A----CC--CA--A--------TA-TCA
 ------C----C--C--------------T---G------CG------G-GT--G------G--------A-----G--G
 -------------A--G-A--------------C---------------C---------C--------------------
 -------A---------------------A---------------------TT------CTGTACCAACACCTATTC
->gi|157058337|gb|EU139286.1| Megaptera novaeangliae voucher UAM:Mamm:30552 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Megaptera novaeangliae (UAM:Mamm:30552)
 A------------C------------C-C-TA------------T------A---------------T------------
 -T-T-A---TTA-T-T--T-----G----G---------TG-C----CTG-AGC---------AG--G---AA---T---
 A---G---TAG-----G--CA---C--T-G------------------G------CC-----TAA---GC----------
@@ -568,7 +568,7 @@ A------A---C-C-A-----C--C---T----G-C-C----AT-G------A----CC--CA--A--------TA-TCA
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -----------------------------------------------------------------------------
->gi|157058339|gb|EU139287.1| Mesoplodon stejnegeri voucher UAM:Mamm:85500 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Mesoplodon stejnegeri (UAM:Mamm:85500)
 T-----------ACTATTT--GG-TGC-C-TGAGCAGGA-A---T------A-----------G---T--GG--GCACTG
 GCCTAAG-CTTA-T-TAATT-CGTGCT--GAATTA----GGTCAA-CCTGGCACATTAATTGGAGATGACCAAGTTTATA
 A--TGTACTAGTAACAGCCCACGCC-TTCGTAATAAT-TTTTTTCATAGTTATG-CCTATTATAATCGGCGGGTTTGGAA
@@ -598,7 +598,7 @@ ACTATACT--ATTAACAGACCGAAATCTAAATACAACCTTTTTTGACCCTGCAGGTGG--GGGAGACC-CA------AT-
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -----------------------------------------------------------------------------
->gi|157058341|gb|EU139288.1| Orcinus orca voucher UAM:Mamm:34219 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Orcinus orca (UAM:Mamm:34219)
 A------------C------------C-C-TA------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------CG-C----CTG-AGC---------GG--G---AA---T---
 A---G---TAG-----G--TA---C--T-G------------------G------TC-----TAA---GC----------
@@ -628,7 +628,7 @@ A------A---C-C-A-C---C--C--------G---C--T-AT-G------A----CT--CA--A--------TA-CCA
 ------C----C--C--G---------------G------CA------G-GA--G------G--------A-----G--G
 ---G------------G-A-------T--C---C-AA---T------------------CT-----------T-------
 -----ATA---------T------C----A---AC------AC--T-----TA----T----T-C------------
->gi|157058343|gb|EU139289.1| Orcinus orca voucher UAM:Mamm:86887 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Orcinus orca (UAM:Mamm:86887)
 A------------C------------C-C-TA------------T------A---------------T------------
 -T-T-A---CTA-T-T--T-----G----G---------CG-C----CTG-AGC---------GG--G---AA---T---
 A---G---TAG-----G--TA---C--T-G------------------G------TC-----TAA---GC----------
@@ -658,7 +658,7 @@ A------A---C-C-A-C---C--C--------G---C--T-AT-G------A----CT--CA--A--------TA-CCA
 ------C----C--C--G---------------G------CA------G-GA--G------G--------A-----G--G
 ---G------------G-A-------T--C---C-AA---T------------------CT-----------T-------
 -----ATA---------T------C----A---AC------AC--T-----TA----T----T-C------------
->gi|157058345|gb|EU139290.1| Phocoena phocoena voucher UAM:Mamm:48681 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Phocoena phocoena (UAM:Mamm:48681)
 A------------C--T---------C---TA------------T------A-----------------------C-C--
 ---T-A---CTA-T-T--T-----G----G---------CG-C----CTG-GGC---------AG--G---AA---T---
 A---G---TAG-----G--TA--CC----G------------------G------CC-----TAA---GC----------
@@ -688,7 +688,7 @@ A------A---C-C-A-----C--C---T----G---C--T-AT-A------A----CC--CA--A--------TA-CCA
 ------C----C--C--------------T---G------CA------G-GA--G------G------------G-G--G
 ---------C------G-A--------T-C---CTG----T--------C---------CT-------------------
 -----ATA---------T------C----A---AC------AC--T-----TA----T----T-C------------
->gi|157058347|gb|EU139291.1| Phocoena phocoena voucher UAM:Mamm:24076 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Phocoena phocoena (UAM:Mamm:24076)
 A------------C--T---------C---TA------------T------A-----------------------C-C--
 ---T-A---CTA-T-T--T-----G----G---------CG-C----CTG-GGC---------AG--G---AA---T---
 A---G---TAG-----G--TA--CC----G------------------G------CC-----TAA---GC----------
@@ -718,7 +718,7 @@ A------A---C-C-A-----C--C---T----G---C--T-AT-A------A----CC--CA--A--------TA-CCA
 ------C----C--C--------------T---G------CA------G-GA--G------G------------G-G--G
 ---------C------G-A--------T-C---CTG----T--------C---------CT-------------------
 -----ATA---------T------C----A---AC------AC--T-----TA----T----T-C------------
->gi|157058349|gb|EU139292.1| Phocoena phocoena voucher UAM:Mamm:20999 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Phocoena phocoena (UAM:Mamm:20999)
 A------------C--T---------C---TA------------T------A-----------------------C-C--
 ---T-A---CTA-T-T--T-----G----G---------CG-C----CTG-GGC---------AG--G---AA---T---
 A---G---TAG-----G--TA--CC----G------------------G------CC-----TAA---GC----------
@@ -748,7 +748,7 @@ A------A---C-C-A-----C--C---T----G---C--T-AT-A------A----CC--CA--A--------TA-CCA
 ------C----C--C--------------T---G------CA------G-GA--G------G------------G-G--G
 ---------C------G-A--------T-C---CTG----T--------C---------CT-------------------
 -----ATA---------T------C----A---AC------AC--T-----TA----T----T-C------------
->gi|157058351|gb|EU139293.1| Phocoenoides dalli voucher UAM:Mamm:86878 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Phocoenoides dalli (UAM:Mamm:86878)
 A------------C--T---------C---TA------------T------A-----------------------T-C--
 ---T-A---CTA-T-T--T-----G----G---------TG-C----CTG-GGC---------AG--G---AA---T---
 A---G---TAG-----G--TA--CC----G------------------G------CC-----TAA---GC----------
@@ -778,7 +778,7 @@ A------A---C-C-A-----C--C---T----G---C--T-AT-A------A----CC--CA--A--------TA-CCA
 ------C----C--C--------------T---G------CA------G-GA--G------G------------G-G--G
 ---------C------G-A--------T-C---CTG----T--------C---------CT-------------------
 -----ATA---------T------C----A---GC------AC--T-----TA----T----T-T------------
->gi|157058353|gb|EU139294.1| Phocoenoides dalli voucher UAM:Mamm:90376 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Phocoenoides dalli (UAM:Mamm:90376)
 A------------C--T---------C---TA------------T------A-----------------------T-C--
 ---T-A---CTA-T-T--T-----G----G---------TG-C----CTG-GGC---------AG--G---AA---T---
 A---G---TAG-----G--TA--CC----G------------------G------CC-----TAA---GC----------
@@ -808,7 +808,7 @@ A------A---C-C-A-----C--C---T----G---C--T-AT-A------A----CC--CA--A--------TA-CCA
 ------C----C--C--------------T---G------CA------G-GA--G------G------------G-G--G
 ---------C------G-A--------T-C---CTG----T--------C---------CT-------------------
 -----ATA---------T------C----A---GC------AC--T-----TA----T----T-T------------
->gi|157058355|gb|EU139295.1| Phoca hispida voucher UAM:Mamm:15665 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Phoca hispida (UAM:Mamm:15665)
 A---------------------------------------C---T------C----------------------------
 ---T-----TTA-T-T--T-----GCT--G---T-TTGGCG-C----ATG-AGC---------TG--G---AA---T---
 A---G---TAG-----G--CA---C--C-G--------------C----------CC-----TTA---G-----------
@@ -838,7 +838,7 @@ A------A---C-C-C-----C--C---T----G---C----AATG------T----CT--CA--A--------TA-CCA
 ------C----C--C--------------T---G------CC------G-GA--G------G--------A-----G--G
 -------------T--G-A--------T-C---C-TA---T--------C---------C--------------------
 -----------------------------------------------------------------------------
->gi|157058357|gb|EU139296.1| Ziphius cavirostris voucher UAM:Mamm:97402 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Ziphius cavirostris (UAM:Mamm:97402)
 ACCTTATAT-TTACTATTT--GG-TGC-C-TGAGCAGGG-A---T------A-----------G---TA-GGTA-C-C-G
 GTCTAAG-CTTA-T-TAATC-CGAGCC--GAACTA----GGTCAA-CCTGGCACATTAATTGGAGATGATCAAGTTTACA
 ACGTG--CTAGTAACAGCCCACGCCTTT-GTAATAATCTTC-TTCATGGTTATACCC-ATCATAATCGGCGGGTTCGGAA
@@ -868,7 +868,7 @@ AACACCTATTC---------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -----------------------------------------------------------------------------
->gi|157058359|gb|EU139297.1| Ziphius cavirostris voucher UAM:Mamm:94547 cytochrome oxidase subunit I (COI) gene, partial cds; mitochondrial
+>Ziphius cavirostris (UAM:Mamm:94547)
 ACCTTATAT-TTACTATTT--GG-TGC-C-TGAGCAGGG-A---T------A-----------G---TA-GGTA-C-C-G
 GTCTAAG-CTTA-T-TAATC-CGAGCC--GAACTA----GGTCAA-CCTGGCACATTAATTGGAGATGATCAAGTTTACA
 ACGTG--CTAGTAACAGCCCACGCCTTT-GTAATAATCTTT-TTCATGGTTATACCC-ATCATAATCGGCGGGTTCGGAA
@@ -898,7 +898,7 @@ AACACCTATTC---------------------------------------------------------------------
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 -----------------------------------------------------------------------------
->gi|5836030:5339-6884 Hippopotamus amphibius mitochondrion, complete genome
+>Hippopotamus amphibius
 A-------TGTT-C-AT--AA--AC-CGC-TGA-C----TATTCTCAAC-CAACCA-CA-AA-GACAT-CGGTA-CAC--
 -TAT-A-T-CTACTAT--T--C--G----G---------CG-C----CTG-AGC---------TG--G---CA---T---
 A---G---CAG-----G--CA---C--T-G------------------G------CC-----TGA---GC----------
@@ -928,7 +928,7 @@ C-CGA-CGATACTCCGACTACCCAGACGCCTATACA--A-C-ATGAAACACTA-TCTCCTCA-ATAGGTT-CTT--TT-A
 TC-TCACTA-ACAGCT-GTAG-TAC-TAATAGTGTTTA-TCAT--T-TGAGAG-GCATTT-GTC-TCCA-AA-CGAGAAG
 TCTT-G--GCT-GTA-G-A--TCTAACTACAACC-AACT-TA---------GA-G-TGACTAAACG---GG-TG-CCCTC
 CA-CCATACCACACATTTGAAGAGCCCGCA--TACGT-GA-AC-TTAAC--TAGCC---------------------
->gi|5835009:6249-7793 Halichoerus grypus mitochondrion, complete genome
+>Halichoerus grypus
 A-------TGTT-C-AT---AG-AT-CGA-TG-GT----TATTTTC--CACAA--ATCATAAGGATAT-CGG---CAC--
 -TCT-----TTA-T-T--T-GC-TG-TTTG----------G-C--GCATG-AGC---------TG--G---AA---T---
 A---G---CAG-----G--CA---C--C--------------------G-----CCC-----TTA---G-----------
