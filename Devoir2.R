@@ -173,19 +173,22 @@ best_model
 
 # tester les modèles évolutifs
 env <- attr(model_test, "env")
-ls(env = env)
+ls(env=env)
+env$`GTR+G(4)+I`
 
 dm <- dist.ml(dna_phy)
 treeNJ <- NJ(dm)
 
 plot(treeNJ, main="Neighbor-Joining")
 
+best_model_name <- gsub("\\+.*", "", best_model$Model)
+
 fit <- pml(treeNJ, data = dna_phy)
 fitGTR <- update(fit, k = 4, inv = 0.589870901568932)
 
 fitGTR <- optim.pml(
     fitGTR,
-    model = "GTR",
+    model = best_model_name,
     optInv = TRUE,
     optGamma = TRUE,
     rearrangement = "stochastic",
@@ -203,6 +206,7 @@ par(mar = c(1, 1, 1, 1))
 plotBS(
     midpoint(fitGTR$tree),
     bs,
+    main   = paste("Meilleur modèle :", best_model$Model),
     p = 0,
     type = "p",
     frame = "circle",
@@ -293,6 +297,40 @@ plotBS(
     bs.col = "red",
     use.edge.length = FALSE
 )
+
+
+# Distances FRAME 1 (modèles manquants)
+dist_JTT_f1 <- dist.ml(aa_frame1_phy, model="JTT")
+dist_BLOSUM_f1 <- dist.ml(aa_frame1_phy, model="Blosum62")
+
+# Arbres
+tree_JTT_f1 <- NJ(dist_JTT_f1)
+tree_BLOSUM_f1 <- NJ(dist_BLOSUM_f1)
+
+# Bootstrap
+bs_JTT_f1 <- bootstrap.phyDat(
+    aa_frame1_phy,
+    FUN=function(x) NJ(dist.ml(x, model="JTT")),
+    bs=1000
+)
+
+bs_BLOSUM_f1 <- bootstrap.phyDat(
+    aa_frame1_phy,
+    FUN=function(x) NJ(dist.ml(x, model="Blosum62")),
+    bs=1000
+)
+
+# Plots
+plotBS(tree_JTT_f1, bs_JTT_f1, main="NJ JTT Frame1 + bootstrap",
+       frame="circle", bs.col="red", cex=0.5, p=0)
+
+plotBS(tree_BLOSUM_f1, bs_BLOSUM_f1, main="NJ BLOSUM62 Frame1 + bootstrap",
+       frame="circle", bs.col="red", cex=0.5, p=0)
+
+# Comparaison des arbres (optionnel mais fortement recommandé)
+RF.dist(tree_LG, tree_JTT)
+RF.dist(tree_LG, tree_BLOSUM)
+RF.dist(tree_LG, tree_LG_f1)
 ###########################################################
 # ------ e) Analyse modelTest par cadre de lecture ------ #
 ###########################################################
