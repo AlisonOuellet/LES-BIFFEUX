@@ -332,6 +332,16 @@ bs2 <- bootstrap.pml(fit2_opt, bs = 1000)
 bs3 <- bootstrap.pml(fit3_opt, bs = 1000)
 
 par(mar = c(1,1,1,1))
+
+plotBS(fit1_opt$tree, bs1,
+       main="Frame 1",
+       frame="circle",
+       bg = "#FFFFFFCC",
+       bs.col = "red",
+       cex=0.6,
+       p=0,
+       use.edge.length = FALSE)
+
 plotBS(fit1_opt$tree, bs1,
        main="Frame 1",
        frame="circle",
@@ -347,6 +357,14 @@ plotBS(fit2_opt$tree, bs2,
        bs.col = "red",
        cex=0.6,
        p=0)
+plotBS(fit2_opt$tree, bs2,
+       main="Frame 2",
+       frame="circle",
+       bg = "#FFFFFFCC",
+       bs.col = "red",
+       cex=0.6,
+       p=0,
+       use.edge.length = FALSE)
 
 plotBS(fit3_opt$tree, bs3,
        main="Frame 3",
@@ -355,4 +373,11 @@ plotBS(fit3_opt$tree, bs3,
        bs.col = "red",
        cex=0.7,
        p=0)
-dev.off()
+plotBS(fit3_opt$tree, bs3,
+       main="Frame 3",
+       frame="circle",
+       bg = "#FFFFFFCC",
+       bs.col = "red",
+       cex=0.7,
+       p=0,
+       use.edge.length = FALSE)
