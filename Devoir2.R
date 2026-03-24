@@ -102,7 +102,7 @@ dna <- as.DNAbin(alignment_default)
 dist_JC  <- dist.dna(dna, pairwise.deletion = FALSE, model = "JC69")    # Jukes-Cantor
 dist_K80 <- dist.dna(dna, pairwise.deletion = FALSE, model = "K80")     # Kimura 2 paramètres
 dist_TN  <- dist.dna(dna, pairwise.deletion = FALSE, model = "TN93")    # Tamura-Nei
-dist_GG95 <- dist.dna(dna, pairwise.deletion = FALSE, model = "GG95")  # Galtier-Gouy (LogDet)
+dist_GG95 <- dist.dna(dna, pairwise.deletion = FALSE, model = "GG95")  # Galtier-Gouy
 
 # Construction des arbres
 arbre_JC  <- nj(dist_JC)
@@ -149,6 +149,18 @@ nodelabels(boot_GG95/10, frame="circle", bg = "#FFFFFFCC", cex = 0.5, adj = c(0.
 round(cor(cbind(boot_JC, boot_TN, boot_K80, boot_GG95),
           use = "pairwise.complete.obs"),3)
 
+# Comparaison des scores bootstrap moyens par modèle
+cat("Moyenne bootstrap JC  :", mean(boot_JC,   na.rm = TRUE), "\n")
+cat("Moyenne bootstrap K80 :", mean(boot_K80,  na.rm = TRUE), "\n")
+cat("Moyenne bootstrap TN  :", mean(boot_TN,   na.rm = TRUE), "\n")
+cat("Moyenne bootstrap GG95:", mean(boot_GG95, na.rm = TRUE), "\n")
+
+# Médiane (plus robuste aux valeurs extrêmes)
+cat("Médiane bootstrap JC  :", median(boot_JC,   na.rm = TRUE), "\n")
+cat("Médiane bootstrap K80 :", median(boot_K80,  na.rm = TRUE), "\n")
+cat("Médiane bootstrap TN  :", median(boot_TN,   na.rm = TRUE), "\n")
+cat("Médiane bootstrap GG95:", median(boot_GG95, na.rm = TRUE), "\n")
+
 # Conversion vers format phangorn
 dna_phy <- as.phyDat(dna)
 
@@ -156,12 +168,12 @@ dna_phy <- as.phyDat(dna)
 model_test <- phangorn::modelTest(dna_phy)
 model_test
 
+best_model <- model_test[which.min(model_test$AIC), ]
+best_model
+
 # tester les modèles évolutifs
 env <- attr(model_test, "env")
 ls(env = env)
-
-best_model <- model_test[which.min(model_test$AIC), ]
-best_model
 
 dm <- dist.ml(dna_phy)
 treeNJ <- NJ(dm)
@@ -252,12 +264,11 @@ bs_BLOSUM <- bootstrap.phyDat(
 
 par(mar = c(1, 1, 1, 1))
 
-plotBS(tree_LG, bs_LG, main="NJ LG + bootstrap", frame="circle", bg = "#FFFFFFCC", bs.col = "red", cex=0.6, p=0)
+plotBS(tree_LG, bs_LG, main="NJ LG + bootstrap", frame="circle", bs.adj = c(1.2), bg = "#FFFFFFCC", bs.col = "red", cex=0.5, p=0)
 
-plotBS(tree_JTT, bs_JTT, main="NJ JTT + bootstrap",frame="circle", bg = "#FFFFFFCC", bs.col = "red", cex=0.6, p=0)
+plotBS(tree_JTT, bs_JTT, main="NJ JTT + bootstrap",frame="circle", bs.adj = c(1.2), bg = "#FFFFFFCC", bs.col = "red", cex=0.5, p=0)
 
-plotBS(tree_BLOSUM, bs_BLOSUM, main="NJ BLOSUM62 + bootstrap",frame="circle",     bg = "#FFFFFFCC",
-       bs.col = "red", cex=0.6, p=0)
+plotBS(tree_BLOSUM, bs_BLOSUM, main="NJ BLOSUM62 + bootstrap", bs.adj = c(1.2), frame="circle", bg = "#FFFFFFCC", bs.col = "red", cex=0.5, p=0)
 
 dist_LG_f1 <- dist.ml(aa_frame1_phy, model="LG")
 tree_LG_f1 <- NJ(dist_LG_f1)
@@ -269,8 +280,19 @@ bs_LG_f1 <- bootstrap.phyDat(
 )
 
 par(mar = c(1, 1, 1, 1))
-plotBS(tree_LG_f1, bs_LG_f1, main="Frame 1 corrigé",frame="circle", bg = "#FFFFFFCC",
-       bs.col = "red", cex=0.6, p=0)
+plotBS(tree_LG_f1, bs_LG_f1, main="Frame 1 corrigé",frame="circle", bs.adj = c(1.2), bg = "#FFFFFFCC",
+       bs.col = "red", cex=0.5, p=0)
+plotBS(
+    midpoint(tree_LG_f1),
+    bs_LG_f1,
+    p = 0,
+    type = "p",
+    frame = "circle",
+    cex = 0.7,
+    bg = "#FFFFFFCC",
+    bs.col = "red",
+    use.edge.length = FALSE
+)
 ###########################################################
 # ------ e) Analyse modelTest par cadre de lecture ------ #
 ###########################################################
@@ -351,13 +373,13 @@ par(mar = c(1,1,1,1))
 plotBS(
     midpoint(fit1_opt$tree),
     bs1,
+    main="Frame 1",
     p = 0,
     type = "p",
     frame = "circle",
     cex = 0.7,
     bg = "#FFFFFFCC",
-    bs.col = "red",
-    use.edge.length = FALSE
+    bs.col = "red"
 )
 
 plotBS(fit1_opt$tree, bs1,
@@ -378,13 +400,13 @@ plotBS(fit2_opt$tree, bs2,
 plotBS(
     midpoint(fit2_opt$tree),
     bs2,
+    main = "Frame 2",
     p = 0,
     type = "p",
     frame = "circle",
     cex = 0.7,
     bg = "#FFFFFFCC",
-    bs.col = "red",
-    use.edge.length = FALSE
+    bs.col = "red"
 )
 
 plotBS(fit3_opt$tree, bs3,
@@ -394,11 +416,14 @@ plotBS(fit3_opt$tree, bs3,
        bs.col = "red",
        cex=0.7,
        p=0)
-plotBS(fit3_opt$tree, bs3,
-       main="Frame 3",
-       frame="circle",
-       bg = "#FFFFFFCC",
-       bs.col = "red",
-       cex=0.7,
-       p=0,
-       use.edge.length = FALSE)
+plotBS(
+    midpoint(fit3_opt$tree),
+    bs3,
+    main = "Frame 3",
+    p = 0,
+    type = "p",
+    frame = "circle",
+    cex = 0.7,
+    bg = "#FFFFFFCC",
+    bs.col = "red"
+)
