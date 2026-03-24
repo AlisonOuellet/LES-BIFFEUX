@@ -113,7 +113,7 @@ arbre_GG95 <- nj(dist_GG95)
 # Visualisation
 par(mar = c(1, 1, 1, 1))
 plot(arbre_JC, cex = 0.9, main="Jukes et Cantor", edge.width = 1.5, x.lim = c(0, max(node.depth.edgelength(arbre_JC)) * 2.5))
-plot(arbre_K80, cex = 0.9, main="Kimura 2 parametres 1980", edge.width = 1.5, x.lim = c(0, max(node.depth.edgelength(arbre_JC)) * 2.5))
+plot(arbre_K80, cex = 0.9, main="Kimura 2 paramètres 1980", edge.width = 1.5, x.lim = c(0, max(node.depth.edgelength(arbre_JC)) * 2.5))
 plot(arbre_TN, cex = 0.9, main="Tamura et Nei 1993", edge.width = 1.5, x.lim = c(0, max(node.depth.edgelength(arbre_JC)) * 2.5))
 plot(arbre_GG95, cex = 0.9, main="Galtier and Gouy 1995", edge.width = 1.5)
 
@@ -252,11 +252,9 @@ bs_BLOSUM <- bootstrap.phyDat(
 
 par(mar = c(1, 1, 1, 1))
 
-plotBS(tree_LG, bs_LG, main="NJ LG + bootstrap", frame="circle",     bg = "#FFFFFFCC",
-       bs.col = "red", cex=0.6, p=0)
+plotBS(tree_LG, bs_LG, main="NJ LG + bootstrap", frame="circle", bg = "#FFFFFFCC", bs.col = "red", cex=0.6, p=0)
 
-plotBS(tree_JTT, bs_JTT, main="NJ JTT + bootstrap",frame="circle",     bg = "#FFFFFFCC",
-       bs.col = "red", cex=0.6, p=0)
+plotBS(tree_JTT, bs_JTT, main="NJ JTT + bootstrap",frame="circle", bg = "#FFFFFFCC", bs.col = "red", cex=0.6, p=0)
 
 plotBS(tree_BLOSUM, bs_BLOSUM, main="NJ BLOSUM62 + bootstrap",frame="circle",     bg = "#FFFFFFCC",
        bs.col = "red", cex=0.6, p=0)
@@ -326,20 +324,23 @@ fit2 <- pml(tree2, data = aa2_phy)
 fit3 <- pml(tree3, data = aa3_phy)
 
 env1 <- attr(best_aa1, "env")
+ls(env = env1)
 
 fit1GTR <- update(fit1, k = 4)
 
 env2 <- attr(best_aa2, "env")
+ls(env = env2)
 
-fit1GTR <- update(fit2, inv=0.0262952483415596 )
+fit2GTR <- update(fit2, k=4)
 
 env3 <- attr(best_aa3, "env")
 
-fit1GTR <- update(fit3, inv = 0.0276463238233312)
+fit3GTR <- update(fit3, k=4)
+ls(env = env3)
 
 fit1_opt <- optim.pml(fit1GTR, model = model1, optGamma = TRUE)
-fit2_opt <- optim.pml(fit2, model = model2, optGamma = TRUE)
-fit3_opt <- optim.pml(fit3, model = model3, optGamma = TRUE)
+fit2_opt <- optim.pml(fit2GTR, model = model2, optGamma = TRUE)
+fit3_opt <- optim.pml(fit3GTR, model = model3, optGamma = TRUE)
 
 bs1 <- bootstrap.pml(fit1_opt, bs = 1000)
 bs2 <- bootstrap.pml(fit2_opt, bs = 1000)
@@ -347,14 +348,17 @@ bs3 <- bootstrap.pml(fit3_opt, bs = 1000)
 
 par(mar = c(1,1,1,1))
 
-plotBS(fit1_opt$tree, bs1,
-       main="Frame 1",
-       frame="circle",
-       bg = "#FFFFFFCC",
-       bs.col = "red",
-       cex=0.6,
-       p=0,
-       use.edge.length = FALSE)
+plotBS(
+    midpoint(fit1_opt$tree),
+    bs1,
+    p = 0,
+    type = "p",
+    frame = "circle",
+    cex = 0.7,
+    bg = "#FFFFFFCC",
+    bs.col = "red",
+    use.edge.length = FALSE
+)
 
 plotBS(fit1_opt$tree, bs1,
        main="Frame 1",
@@ -371,14 +375,17 @@ plotBS(fit2_opt$tree, bs2,
        bs.col = "red",
        cex=0.6,
        p=0)
-plotBS(fit2_opt$tree, bs2,
-       main="Frame 2",
-       frame="circle",
-       bg = "#FFFFFFCC",
-       bs.col = "red",
-       cex=0.6,
-       p=0,
-       use.edge.length = FALSE)
+plotBS(
+    midpoint(fit2_opt$tree),
+    bs2,
+    p = 0,
+    type = "p",
+    frame = "circle",
+    cex = 0.7,
+    bg = "#FFFFFFCC",
+    bs.col = "red",
+    use.edge.length = FALSE
+)
 
 plotBS(fit3_opt$tree, bs3,
        main="Frame 3",
